@@ -14,6 +14,6 @@ public class EventUser {
     
     
     public static void main(String[] args) {
-        System.out.println("hiaaaaa");
+        System.out.println("ffear");
     }
 }
