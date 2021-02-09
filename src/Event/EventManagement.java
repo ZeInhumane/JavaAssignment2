@@ -1,10 +1,13 @@
 package Event;
 
-import java.awt.List;
+import java.util.List;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.JOptionPane;
 
 /**
@@ -50,7 +53,7 @@ public class EventManagement {
      * string instead of displaying a dialog.
      */
     public String displayAllEvents() {
-        
+
         String displayAll = null;
         // Best effort at even spacing for the data presented.
         String displayAllEvents = String.format("%-8s", "S/N")
@@ -58,9 +61,9 @@ public class EventManagement {
                 + String.format("%-25s", "Organizer")
                 + String.format("%-20s", "Date")
                 + String.format("%-35s", "Fees($)")
-                + String.format("%-20s", "Event Type")+ "\n";
+                + String.format("%-20s", "Event Type") + "\n";
         displayAll.format(displayAllEvents);
-        
+
         // loop thru all items in the array and output details.
         for (int i = 0; i < result.size(); i++) {
             String currentLine = result.get(i);
@@ -70,11 +73,11 @@ public class EventManagement {
             String price = currentLine.split(";")[3];
             String eventType = currentLine.split(";")[4];
             displayAllEvents += String.format("%-8s", i)
-                + String.format("%-30s", name)
-                + String.format("%-25s", club)
-                + String.format("%-20s", date)
-                + String.format("%-35s", price)
-                + String.format("%-20s", eventType)+ "\n";
+                    + String.format("%-30s", name)
+                    + String.format("%-25s", club)
+                    + String.format("%-20s", date)
+                    + String.format("%-35s", price)
+                    + String.format("%-20s", eventType) + "\n";
         }
         return displayAllEvents;
     }
@@ -87,16 +90,27 @@ public class EventManagement {
      * @param inDate
      * @param inFees
      */
-    public void addEvent(String inName, String inOrganiser, String inDate, double inFees) {
+    public void addEvent(String inName, String inOrganiser, String inDate, double inFees, String typeOfEvent) {
         // Create new array with current array length + 1
-        // TODO
-
-        // copy existing events to the new array
-        // TODO
-        // the new event is appended as the last event in new array
-        // TODO
-        // Reassign events to the new events.  The old array will be discarded.
-        // TODO
+        String stringInFees = String.valueOf(inFees);
+        //List 1
+        List<String> namesList = Arrays.asList(inName + ";", inOrganiser + ";", inDate + ";", stringInFees + ";", typeOfEvent + ";");
+        //List 2
+        ArrayList<String> otherList = new ArrayList<>();
+        otherList.addAll(namesList);
+        try {
+            File file = new File("./src/Event/EventDatabase.txt");
+            FileWriter fr = new FileWriter(file, true);
+            fr.write(otherList.get(0));
+            fr.write(otherList.get(1));
+            fr.write(otherList.get(2));
+            fr.write(otherList.get(3));
+            fr.write(otherList.get(4));
+            fr.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
     }
 
     /**
@@ -165,8 +179,7 @@ public class EventManagement {
      */
     public static void main(String[] args) {
         EventManagement theEM = new EventManagement();
-        
-       
+        theEM.addEvent("a","a","a",1,"a");
 //        theEM.displayAllEvents();
 //        theEM.addEvent("Kickboxing", "Alvin", "5/6/2099", 59);
 //        

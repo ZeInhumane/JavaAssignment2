@@ -1,3 +1,4 @@
 Job Fair;NTU Club;10.9; 01-Dec-2020;Online Event
 Dancing;SP Club;69; 01-Jan-2021;Face-to-Face Event
 Singing;NUS Club;50; 15-Jan-2021; Online Event
+a;a;a;1.0;a;
