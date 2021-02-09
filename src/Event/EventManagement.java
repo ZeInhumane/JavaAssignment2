@@ -1,8 +1,10 @@
 package Event;
 
+import java.awt.List;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -12,7 +14,7 @@ import javax.swing.JOptionPane;
  */
 public class EventManagement {
 
-    private Event[] events; /// All available events
+    ArrayList<String> result = new ArrayList<>();
 
     private int countSearchResult; /// used by searchByFees
 
@@ -32,34 +34,49 @@ public class EventManagement {
         int lines = 0;
         int numOfEvents = 0;
         String nextLine;
-        try (BufferedReader br = new BufferedReader(new FileReader("eventDatabase.txt"))) {
-            StringBuilder sb = new StringBuilder();
-            String line = br.readLine();
-
-            while (line != null) {
-                sb.append(line);
-                sb.append(System.lineSeparator());
-                line = br.readLine();
+        try (BufferedReader br = new BufferedReader(new FileReader("./src/Event/EventDatabase.txt"))) {
+            while (br.ready()) {
+                result.add(br.readLine());
             }
-            String everything = sb.toString();
-            System.out.println(everything);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println(result);
+        System.out.println(result.size());
     }
 
     /**
      * Show all events using a Message Dialog. This may be changed to return a
      * string instead of displaying a dialog.
      */
-    public void displayAllEvents() {
+    public String displayAllEvents() {
+        
+        String displayAll = null;
         // Best effort at even spacing for the data presented.
-        // TODO
-
+        String displayAllEvents = String.format("%-8s", "S/N")
+                + String.format("%-30s", "Name")
+                + String.format("%-25s", "Organizer")
+                + String.format("%-20s", "Date")
+                + String.format("%-35s", "Fees($)")
+                + String.format("%-20s", "Event Type")+ "\n";
+        displayAll.format(displayAllEvents);
+        
         // loop thru all items in the array and output details.
-        // TODO
-        // Change to return as string instead if desired.
-        // TODO
+        for (int i = 0; i < result.size(); i++) {
+            String currentLine = result.get(i);
+            String name = currentLine.split(";")[0];
+            String club = currentLine.split(";")[1];
+            String date = currentLine.split(";")[2];
+            String price = currentLine.split(";")[3];
+            String eventType = currentLine.split(";")[4];
+            displayAllEvents += String.format("%-8s", i)
+                + String.format("%-30s", name)
+                + String.format("%-25s", club)
+                + String.format("%-20s", date)
+                + String.format("%-35s", price)
+                + String.format("%-20s", eventType)+ "\n";
+        }
+        return displayAllEvents;
     }
 
     /**
@@ -94,31 +111,28 @@ public class EventManagement {
 
         // event not found
         // TODO
-
-        else {
-            // create the new array with events less the deleted event
-            // Size of new array will be current array length, less one
-            // TODO
-
-            // there are 2 indices we'll be working with.
-            // i is the index for the current array
-            // theNewIndex is the index into theNewList
-            // TODO
-                // this isn't the droid we're looking for...
-                // We'll add all events that are not the event we want to delete
-                // TODO
-            }
-
+//        else {
+//            // create the new array with events less the deleted event
+//            // Size of new array will be current array length, less one
+//            // TODO
+//
+//            // there are 2 indices we'll be working with.
+//            // i is the index for the current array
+//            // theNewIndex is the index into theNewList
+//            // TODO
+//                // this isn't the droid we're looking for...
+//                // We'll add all events that are not the event we want to delete
+//                // TODO
+//            }
         // TODO
     }
-}
 
-/**
- * Utility method that can be used by itself, or by the delete method.
- *
- * @param inEventName
- * @return Event object, if found.
- */
+    /**
+     * Utility method that can be used by itself, or by the delete method.
+     *
+     * @param inEventName
+     * @return Event object, if found.
+     */
 //    public Event searchByName(String inEventName) {
 //        //TODO
 //            // Found it! Retrieve. 
@@ -128,12 +142,12 @@ public class EventManagement {
 //        
 //        // TODO
 //    }
-/**
- * search for all events equal or less than inFees
- *
- * @param inMaxFees
- * @return Returns array containing events that meet the search criteria.
- */
+    /**
+     * search for all events equal or less than inFees
+     *
+     * @param inMaxFees
+     * @return Returns array containing events that meet the search criteria.
+     */
 //    public Event[] searchByFees(double inMaxFees) {
 //        // TODO
 //        // Max case scenario is that all events meet inMaxFees
@@ -144,13 +158,15 @@ public class EventManagement {
 //        
 //        // TODO
 //    }
-/**
- * Test method for all the methods in EventManager Class.
- *
- * @param args
- */
-//    public static void main(String[] args) {
-//        EventManager theEM = new EventManager();
+    /**
+     * Test method for all the methods in EventManager Class.
+     *
+     * @param args
+     */
+    public static void main(String[] args) {
+        EventManagement theEM = new EventManagement();
+        
+       
 //        theEM.displayAllEvents();
 //        theEM.addEvent("Kickboxing", "Alvin", "5/6/2099", 59);
 //        
@@ -172,5 +188,5 @@ public class EventManagement {
 //        
 //        theEM.deleteEvent("Dancing");
 //        theEM.displayAllEvents();
-//    }
+    }
 }

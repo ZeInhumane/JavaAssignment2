@@ -18,6 +18,7 @@ public class EventManagementSystem extends javax.swing.JFrame {
      */
     public EventManagementSystem() {
         initComponents();
+        EventManagement EventManagement = new EventManagement();
     }
 
     /**
@@ -59,9 +60,9 @@ public class EventManagementSystem extends javax.swing.JFrame {
         jTextField6 = new javax.swing.JTextField();
         searchByFees1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        displayEvents = new javax.swing.JTextArea();
         jLabel9 = new javax.swing.JLabel();
-        searchByFees = new javax.swing.JButton();
+        displayEvent = new javax.swing.JButton();
         resetForm = new javax.swing.JButton();
         exitForm = new javax.swing.JButton();
 
@@ -298,18 +299,18 @@ public class EventManagementSystem extends javax.swing.JFrame {
                     .addGap(10, 10, 10)))
         );
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        displayEvents.setColumns(20);
+        displayEvents.setRows(5);
+        jScrollPane1.setViewportView(displayEvents);
 
         jLabel9.setText("Results");
 
-        searchByFees.setBackground(new java.awt.Color(0, 102, 255));
-        searchByFees.setForeground(new java.awt.Color(255, 255, 255));
-        searchByFees.setText("Search by fees");
-        searchByFees.addActionListener(new java.awt.event.ActionListener() {
+        displayEvent.setBackground(new java.awt.Color(0, 102, 255));
+        displayEvent.setForeground(new java.awt.Color(255, 255, 255));
+        displayEvent.setText("Search by fees");
+        displayEvent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchByFeesActionPerformed(evt);
+                searchByFees(evt);
             }
         });
 
@@ -351,7 +352,7 @@ public class EventManagementSystem extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel9)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(searchByFees, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(displayEvent, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 702, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -375,7 +376,7 @@ public class EventManagementSystem extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(searchByFees, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(displayEvent, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -403,10 +404,6 @@ public class EventManagementSystem extends javax.swing.JFrame {
         jButton2.setEnabled(true); 
     }//GEN-LAST:event_AdministratorActionPerformed
 
-    private void searchByFeesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchByFeesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_searchByFeesActionPerformed
-
     private void searchByFees1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchByFees1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_searchByFees1ActionPerformed
@@ -426,6 +423,12 @@ public class EventManagementSystem extends javax.swing.JFrame {
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3ActionPerformed
+
+    private void searchByFees(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchByFees
+        EventManagement EventManagement = new EventManagement();
+        
+        displayEvents.append(EventManagement.displayAllEvents());
+    }//GEN-LAST:event_searchByFees
 
     /**
      * @param args the command line arguments
@@ -467,6 +470,8 @@ public class EventManagementSystem extends javax.swing.JFrame {
     private javax.swing.JRadioButton Administrator;
     private javax.swing.JRadioButton Normal;
     private javax.swing.JButton addEvent;
+    private javax.swing.JButton displayEvent;
+    private javax.swing.JTextArea displayEvents;
     private javax.swing.JButton exitForm;
     private javax.swing.JRadioButton faceToFaceEvent;
     private javax.swing.JButton jButton2;
@@ -484,7 +489,6 @@ public class EventManagementSystem extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
@@ -494,7 +498,6 @@ public class EventManagementSystem extends javax.swing.JFrame {
     private javax.swing.JRadioButton onlineEvent;
     private javax.swing.JButton registerEvent;
     private javax.swing.JButton resetForm;
-    private javax.swing.JButton searchByFees;
     private javax.swing.JButton searchByFees1;
     private javax.swing.JButton searchByName;
     private javax.swing.ButtonGroup userSelectEventType;
