@@ -6,6 +6,8 @@
 package Event;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import static jdk.nashorn.internal.objects.Global.undefined;
 
 /**
  *
@@ -41,15 +43,15 @@ public class EventManagementSystem extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        eventName = new javax.swing.JTextField();
+        eventOrganizer = new javax.swing.JTextField();
+        eventFees = new javax.swing.JTextField();
         onlineEvent = new javax.swing.JRadioButton();
         faceToFaceEvent = new javax.swing.JRadioButton();
         jLabel6 = new javax.swing.JLabel();
         addEvent = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jTextField5 = new javax.swing.JTextField();
+        eventDate = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
@@ -126,15 +128,15 @@ public class EventManagementSystem extends javax.swing.JFrame {
 
         jLabel5.setText("Date:");
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        eventName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                eventNameActionPerformed(evt);
             }
         });
 
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        eventOrganizer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                eventOrganizerActionPerformed(evt);
             }
         });
 
@@ -149,6 +151,11 @@ public class EventManagementSystem extends javax.swing.JFrame {
 
         addEvent.setBackground(new java.awt.Color(51, 204, 0));
         addEvent.setText("Add Event");
+        addEvent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addEvent(evt);
+            }
+        });
 
         jButton2.setBackground(new java.awt.Color(51, 204, 0));
         jButton2.setText("Delete Event");
@@ -170,10 +177,10 @@ public class EventManagementSystem extends javax.swing.JFrame {
                                     .addComponent(jLabel5))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(eventName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(eventOrganizer, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(eventFees, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(eventDate, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                                 .addGap(23, 23, 23)
                                 .addComponent(jLabel6)
@@ -197,23 +204,23 @@ public class EventManagementSystem extends javax.swing.JFrame {
                 .addGap(4, 4, 4)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(eventName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(eventOrganizer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(eventFees, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(eventDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(onlineEvent)
-                    .addComponent(faceToFaceEvent))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(faceToFaceEvent)
+                    .addComponent(onlineEvent))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addEvent)
@@ -394,14 +401,14 @@ public class EventManagementSystem extends javax.swing.JFrame {
 
     private void NormalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NormalActionPerformed
         registerEvent.setEnabled(true);
-        addEvent.setEnabled(false); 
-        jButton2.setEnabled(false); 
+        addEvent.setEnabled(false);
+        jButton2.setEnabled(false);
     }//GEN-LAST:event_NormalActionPerformed
 
     private void AdministratorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdministratorActionPerformed
-        registerEvent.setEnabled(false); 
-        addEvent.setEnabled(true); 
-        jButton2.setEnabled(true); 
+        registerEvent.setEnabled(false);
+        addEvent.setEnabled(true);
+        jButton2.setEnabled(true);
     }//GEN-LAST:event_AdministratorActionPerformed
 
     private void searchByFees1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchByFees1ActionPerformed
@@ -416,19 +423,74 @@ public class EventManagementSystem extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_exitFormActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void eventNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eventNameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_eventNameActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void eventOrganizerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eventOrganizerActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_eventOrganizerActionPerformed
 
     private void searchByFees(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchByFees
         EventManagement EventManagement = new EventManagement();
-        
+
         displayEvents.append(EventManagement.displayAllEvents());
     }//GEN-LAST:event_searchByFees
+
+    private void addEvent(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addEvent
+        EventManagement EventManagement = new EventManagement();
+        String inName = null;
+        String inOrganizer = null;
+        String inDate = null;
+        String typeOfEvent = null;
+        boolean correctSubmission = true;
+        double inEventFees = 0;
+        System.out.println(eventName.getText() + " this is supposed to be an empty event name");
+        try {
+            inEventFees = Double.parseDouble(eventFees.getText());
+        } catch (NumberFormatException e) {
+//            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Please enter a valid event fee", "Alert", JOptionPane.WARNING_MESSAGE);
+            eventFees.setText("");
+            correctSubmission = false;
+        }
+        if (eventName.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter an event name that is not null", "Alert", JOptionPane.WARNING_MESSAGE);
+            correctSubmission = false;
+        } else {
+            inName = eventName.getText();
+        }
+        if (eventOrganizer.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter an organizer that is not null", "Alert", JOptionPane.WARNING_MESSAGE);
+            correctSubmission = false;
+        } else {
+            inOrganizer = eventOrganizer.getText();
+        }
+        if (eventDate.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter an event date that is not null", "Alert", JOptionPane.WARNING_MESSAGE);
+            correctSubmission = false;
+        } else {
+            inDate = eventDate.getText();
+        }
+        if (onlineEvent.isSelected()) {
+            typeOfEvent = "Online Event";
+        } else if (faceToFaceEvent.isSelected()) {
+            typeOfEvent = "Face To Face Event";
+        } else {
+            JOptionPane.showMessageDialog(this, "Please enter a valid event", "Alert", JOptionPane.WARNING_MESSAGE);
+            correctSubmission = false;
+        }
+
+        if (correctSubmission == true) {
+            EventManagement.addEvent(inName, inOrganizer, inDate, inEventFees, typeOfEvent);
+            JOptionPane.showMessageDialog(this, "Successfully submitted the event into the database!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            eventName.setText("");
+            eventOrganizer.setText("");
+            eventDate.setText("");
+            eventFees.setText("");
+            userSelectEventType.clearSelection();
+        }
+    }//GEN-LAST:event_addEvent
 
     /**
      * @param args the command line arguments
@@ -472,6 +534,10 @@ public class EventManagementSystem extends javax.swing.JFrame {
     private javax.swing.JButton addEvent;
     private javax.swing.JButton displayEvent;
     private javax.swing.JTextArea displayEvents;
+    private javax.swing.JTextField eventDate;
+    private javax.swing.JTextField eventFees;
+    private javax.swing.JTextField eventName;
+    private javax.swing.JTextField eventOrganizer;
     private javax.swing.JButton exitForm;
     private javax.swing.JRadioButton faceToFaceEvent;
     private javax.swing.JButton jButton2;
@@ -490,10 +556,6 @@ public class EventManagementSystem extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JRadioButton onlineEvent;
     private javax.swing.JButton registerEvent;

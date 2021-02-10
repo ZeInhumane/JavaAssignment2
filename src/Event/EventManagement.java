@@ -57,7 +57,7 @@ public class EventManagement {
         String displayAll = null;
         // Best effort at even spacing for the data presented.
         String displayAllEvents = String.format("%-8s", "S/N")
-                + String.format("%-30s", "Name")
+                + String.format("%-40s", "Name")
                 + String.format("%-25s", "Organizer")
                 + String.format("%-20s", "Date")
                 + String.format("%-35s", "Fees($)")
@@ -73,7 +73,7 @@ public class EventManagement {
             String price = currentLine.split(";")[3];
             String eventType = currentLine.split(";")[4];
             displayAllEvents += String.format("%-8s", i)
-                    + String.format("%-30s", name)
+                    + String.format("%-40", name)
                     + String.format("%-25s", club)
                     + String.format("%-20s", date)
                     + String.format("%-35s", price)
@@ -90,11 +90,11 @@ public class EventManagement {
      * @param inDate
      * @param inFees
      */
-    public void addEvent(String inName, String inOrganiser, String inDate, double inFees, String typeOfEvent) {
-        // Create new array with current array length + 1
+    public void addEvent(String inName, String inOrganizer, String inDate, double inFees, String typeOfEvent) {
+        //Add array list to another array list
         String stringInFees = String.valueOf(inFees);
         //List 1
-        List<String> namesList = Arrays.asList(inName + ";", inOrganiser + ";", inDate + ";", stringInFees + ";", typeOfEvent + ";");
+        List<String> namesList = Arrays.asList(inName + ";", inOrganizer + ";", stringInFees + ";", inDate + ";", typeOfEvent);
         //List 2
         ArrayList<String> otherList = new ArrayList<>();
         otherList.addAll(namesList);
@@ -110,7 +110,7 @@ public class EventManagement {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
+
     }
 
     /**
@@ -120,11 +120,38 @@ public class EventManagement {
      * @param inEventName
      */
     public void deleteEvent(String inEventName) {
-        // Try to locate the event by name first
+        String eventToDelete = null;
+        ArrayList<String> newDatabase = new ArrayList<>();
+        int lineToDelete = -1;
         // TODO
 
         // event not found
         // TODO
+        for (int i = 0; i < result.size(); i++) {
+            String currentLine = result.get(i);
+            String name = currentLine.split(";")[0];
+            if (name.equalsIgnoreCase(eventToDelete)) {
+                lineToDelete = i;
+            }
+        }
+        if (lineToDelete != -1) {
+            for (int i = 0; i < result.size(); i++) {
+                if (lineToDelete == i) {
+                } else {
+                    try {
+                        File file = new File("./src/Event/EventDatabase.txt");
+                        FileWriter fr = new FileWriter(file, false);
+                        fr.write(result.get(i));
+                        fr.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+        }else{
+            JOptionPane.showMessageDialog(this, "Please enter a valid event", "Alert", JOptionPane.WARNING_MESSAGE);
+        }
 //        else {
 //            // create the new array with events less the deleted event
 //            // Size of new array will be current array length, less one
@@ -179,7 +206,7 @@ public class EventManagement {
      */
     public static void main(String[] args) {
         EventManagement theEM = new EventManagement();
-        theEM.addEvent("a","a","a",1,"a");
+        theEM.addEvent("a", "a", "a", 1, "a");
 //        theEM.displayAllEvents();
 //        theEM.addEvent("Kickboxing", "Alvin", "5/6/2099", 59);
 //        
