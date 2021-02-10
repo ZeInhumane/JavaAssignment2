@@ -50,7 +50,7 @@ public class EventManagementSystem extends javax.swing.JFrame {
         faceToFaceEvent = new javax.swing.JRadioButton();
         jLabel6 = new javax.swing.JLabel();
         addEvent = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        deleteEvent = new javax.swing.JButton();
         eventDate = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
@@ -157,8 +157,13 @@ public class EventManagementSystem extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(51, 204, 0));
-        jButton2.setText("Delete Event");
+        deleteEvent.setBackground(new java.awt.Color(51, 204, 0));
+        deleteEvent.setText("Delete Event");
+        deleteEvent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteEvent(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -194,7 +199,7 @@ public class EventManagementSystem extends javax.swing.JFrame {
                         .addGap(21, 21, 21)
                         .addComponent(addEvent)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2)
+                        .addComponent(deleteEvent)
                         .addGap(54, 54, 54))))
         );
         jPanel2Layout.setVerticalGroup(
@@ -224,7 +229,7 @@ public class EventManagementSystem extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addEvent)
-                    .addComponent(jButton2))
+                    .addComponent(deleteEvent))
                 .addContainerGap())
         );
 
@@ -314,7 +319,7 @@ public class EventManagementSystem extends javax.swing.JFrame {
 
         displayEvent.setBackground(new java.awt.Color(0, 102, 255));
         displayEvent.setForeground(new java.awt.Color(255, 255, 255));
-        displayEvent.setText("Search by fees");
+        displayEvent.setText("Display Events");
         displayEvent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchByFees(evt);
@@ -402,13 +407,13 @@ public class EventManagementSystem extends javax.swing.JFrame {
     private void NormalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NormalActionPerformed
         registerEvent.setEnabled(true);
         addEvent.setEnabled(false);
-        jButton2.setEnabled(false);
+        deleteEvent.setEnabled(false);
     }//GEN-LAST:event_NormalActionPerformed
 
     private void AdministratorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdministratorActionPerformed
         registerEvent.setEnabled(false);
         addEvent.setEnabled(true);
-        jButton2.setEnabled(true);
+        deleteEvent.setEnabled(true);
     }//GEN-LAST:event_AdministratorActionPerformed
 
     private void searchByFees1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchByFees1ActionPerformed
@@ -432,6 +437,7 @@ public class EventManagementSystem extends javax.swing.JFrame {
     }//GEN-LAST:event_eventOrganizerActionPerformed
 
     private void searchByFees(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchByFees
+        displayEvents.setText("");
         EventManagement EventManagement = new EventManagement();
 
         displayEvents.append(EventManagement.displayAllEvents());
@@ -492,6 +498,18 @@ public class EventManagementSystem extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_addEvent
 
+    private void deleteEvent(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteEvent
+        EventManagement EventManagement = new EventManagement();
+        String inName = eventName.getText();
+        boolean isFulfilled;
+        isFulfilled = EventManagement.deleteEvent(inName);
+        if(isFulfilled == true){
+            JOptionPane.showMessageDialog(this, "Successfully deleted the event" + inName + " !", "Success", JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(this, "Please enter a valid event to delete by :0", "Alert", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_deleteEvent
+
     /**
      * @param args the command line arguments
      */
@@ -532,6 +550,7 @@ public class EventManagementSystem extends javax.swing.JFrame {
     private javax.swing.JRadioButton Administrator;
     private javax.swing.JRadioButton Normal;
     private javax.swing.JButton addEvent;
+    private javax.swing.JButton deleteEvent;
     private javax.swing.JButton displayEvent;
     private javax.swing.JTextArea displayEvents;
     private javax.swing.JTextField eventDate;
@@ -540,7 +559,6 @@ public class EventManagementSystem extends javax.swing.JFrame {
     private javax.swing.JTextField eventOrganizer;
     private javax.swing.JButton exitForm;
     private javax.swing.JRadioButton faceToFaceEvent;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

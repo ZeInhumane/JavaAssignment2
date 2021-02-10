@@ -57,7 +57,7 @@ public class EventManagement {
         String displayAll = null;
         // Best effort at even spacing for the data presented.
         String displayAllEvents = String.format("%-8s", "S/N")
-                + String.format("%-40s", "Name")
+                + String.format("%-30s", "Name")
                 + String.format("%-25s", "Organizer")
                 + String.format("%-20s", "Date")
                 + String.format("%-35s", "Fees($)")
@@ -72,8 +72,8 @@ public class EventManagement {
             String date = currentLine.split(";")[2];
             String price = currentLine.split(";")[3];
             String eventType = currentLine.split(";")[4];
-            displayAllEvents += String.format("%-8s", i)
-                    + String.format("%-40", name)
+            displayAllEvents += String.format("%-8s", i+1)
+                    + String.format("%-30s", name)
                     + String.format("%-25s", club)
                     + String.format("%-20s", date)
                     + String.format("%-35s", price)
@@ -119,9 +119,10 @@ public class EventManagement {
      *
      * @param inEventName
      */
-    public void deleteEvent(String inEventName) {
-        String eventToDelete = null;
-        ArrayList<String> newDatabase = new ArrayList<>();
+    public boolean deleteEvent(String inEventName) {
+        boolean correctDeletion = true;
+        String eventToDelete = inEventName;
+//        ArrayList<String> newDatabase = new ArrayList<>();
         int lineToDelete = -1;
         // TODO
 
@@ -132,25 +133,35 @@ public class EventManagement {
             String name = currentLine.split(";")[0];
             if (name.equalsIgnoreCase(eventToDelete)) {
                 lineToDelete = i;
+                System.out.println("line to delete" + i);
             }
         }
         if (lineToDelete != -1) {
+            //clear database first
+            try {
+                File file = new File("./src/Event/EventDatabase.txt");
+                FileWriter fr = new FileWriter(file, false);
+                fr.write("");
+                fr.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             for (int i = 0; i < result.size(); i++) {
                 if (lineToDelete == i) {
                 } else {
                     try {
-                        File file = new File("./src/Event/EventDatabase.txt");
-                        FileWriter fr = new FileWriter(file, false);
-                        fr.write(result.get(i));
-                        fr.close();
+                        File newDatabase = new File("./src/Event/EventDatabase.txt");
+                        FileWriter newDatabasefr = new FileWriter(newDatabase, true);
+                        newDatabasefr.write(result.get(i) + "\n");
+                        newDatabasefr.close();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }
 
             }
-        }else{
-            JOptionPane.showMessageDialog(this, "Please enter a valid event", "Alert", JOptionPane.WARNING_MESSAGE);
+        } else {
+            correctDeletion = false;
         }
 //        else {
 //            // create the new array with events less the deleted event
@@ -166,6 +177,7 @@ public class EventManagement {
 //                // TODO
 //            }
         // TODO
+        return correctDeletion;
     }
 
     /**
