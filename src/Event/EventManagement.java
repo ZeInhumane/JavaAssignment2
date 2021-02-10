@@ -218,7 +218,6 @@ public class EventManagement {
      */
     public static void main(String[] args) {
         EventManagement theEM = new EventManagement();
-        theEM.addEvent("a", "a", "a", 1, "a");
 //        theEM.displayAllEvents();
 //        theEM.addEvent("Kickboxing", "Alvin", "5/6/2099", 59);
 //        

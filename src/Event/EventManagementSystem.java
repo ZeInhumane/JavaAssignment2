@@ -5,8 +5,11 @@
  */
 package Event;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import static jdk.nashorn.internal.objects.Global.undefined;
 
 /**
@@ -421,7 +424,11 @@ public class EventManagementSystem extends javax.swing.JFrame {
     }//GEN-LAST:event_searchByFees1ActionPerformed
 
     private void resetFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetFormActionPerformed
-        // TODO add your handling code here:
+        ArrayList<String> otherList = new ArrayList<>();
+    
+    
+
+    
     }//GEN-LAST:event_resetFormActionPerformed
 
     private void exitFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitFormActionPerformed
