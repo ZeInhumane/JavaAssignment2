@@ -56,28 +56,28 @@ public class EventManagement {
 
         String displayAll = null;
         // Best effort at even spacing for the data presented.
-        String displayAllEvents = String.format("%-8s", "S/N")
+        String displayAllEvents = String.format("%-10s", "S/N")
                 + String.format("%-30s", "Name")
-                + String.format("%-25s", "Organizer")
-                + String.format("%-20s", "Date")
+                + String.format("%-35s", "Organizer")
+                + String.format("%-35s", "Date")
                 + String.format("%-35s", "Fees($)")
-                + String.format("%-20s", "Event Type") + "\n";
+                + String.format("%-35s", "Event Type") + "\n";
         displayAll.format(displayAllEvents);
 
         // loop thru all items in the array and output details.
         for (int i = 0; i < result.size(); i++) {
             String currentLine = result.get(i);
-            String name = currentLine.split(";")[0];
-            String club = currentLine.split(";")[1];
-            String date = currentLine.split(";")[2];
-            String price = currentLine.split(";")[3];
-            String eventType = currentLine.split(";")[4];
-            displayAllEvents += String.format("%-8s", i+1)
+            String name = currentLine.split(";")[0].trim();
+            String club = currentLine.split(";")[1].trim();
+            String date = currentLine.split(";")[2].trim();
+            String price = currentLine.split(";")[3].trim();
+            String eventType = currentLine.split(";")[4].trim();
+            displayAllEvents += String.format("%-10s", i+1)
                     + String.format("%-30s", name)
-                    + String.format("%-25s", club)
-                    + String.format("%-20s", date)
+                    + String.format("%-35s", club)
+                    + String.format("%-35s", date)
                     + String.format("%-35s", price)
-                    + String.format("%-20s", eventType) + "\n";
+                    + String.format("%-35s", eventType) + "\n";
         }
         return displayAllEvents;
     }
@@ -186,15 +186,39 @@ public class EventManagement {
      * @param inEventName
      * @return Event object, if found.
      */
-//    public Event searchByName(String inEventName) {
-//        //TODO
-//            // Found it! Retrieve. 
-//            // Assuming there are no repeats.
-//            // If there are repeats, this will retrieve the last one found.
-//            // TODO
-//        
-//        // TODO
-//    }
+    public Event searchByName(String inEventName) {
+        String displaySearch = null;
+        for (int i = 0; i < result.size(); i++) {
+            String currentLine = result.get(i);
+            String name = currentLine.split(";")[0];
+            if (name.equalsIgnoreCase(inEventName)) {
+                displaySearch += i;
+                System.out.println("line to delete" + i);
+            }
+        }
+        for (int i = 0; i < result.size(); i++) {
+            String currentLine = result.get(i);
+            String name = currentLine.split(";")[0].trim();
+            String club = currentLine.split(";")[1].trim();
+            String date = currentLine.split(";")[2].trim();
+            String price = currentLine.split(";")[3].trim();
+            String eventType = currentLine.split(";")[4].trim();
+            displaySearch += String.format("%-10s", i+1)
+                    + String.format("%-30s", name)
+                    + String.format("%-35s", club)
+                    + String.format("%-35s", date)
+                    + String.format("%-35s", price)
+                    + String.format("%-35s", eventType) + "\n";
+        }
+        return null;
+        //TODO
+            // Found it! Retrieve. 
+            // Assuming there are no repeats.
+            // If there are repeats, this will retrieve the last one found.
+            // TODO
+        
+        // TODO
+    }
     /**
      * search for all events equal or less than inFees
      *
