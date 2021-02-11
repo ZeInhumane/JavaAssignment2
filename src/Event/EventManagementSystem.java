@@ -57,13 +57,13 @@ public class EventManagementSystem extends javax.swing.JFrame {
         eventDate = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        searchByEventText = new javax.swing.JTextField();
         searchByName = new javax.swing.JButton();
         registerEvent = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        searchByFees1 = new javax.swing.JButton();
+        searchByFeesText = new javax.swing.JTextField();
+        searchByFeesButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         displayEvents = new javax.swing.JTextArea();
         jLabel9 = new javax.swing.JLabel();
@@ -252,7 +252,7 @@ public class EventManagementSystem extends javax.swing.JFrame {
                 .addGap(47, 47, 47)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchByEventText, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -265,7 +265,7 @@ public class EventManagementSystem extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(searchByEventText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(searchByName, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -277,10 +277,10 @@ public class EventManagementSystem extends javax.swing.JFrame {
 
         jLabel8.setText("Event Fees($)");
 
-        searchByFees1.setText("Search by fees");
-        searchByFees1.addActionListener(new java.awt.event.ActionListener() {
+        searchByFeesButton.setText("Search by fees");
+        searchByFeesButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchByFees1ActionPerformed(evt);
+                searchByFeesButtonActionPerformed(evt);
             }
         });
 
@@ -292,12 +292,12 @@ public class EventManagementSystem extends javax.swing.JFrame {
                 .addGap(47, 47, 47)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(searchByFeesText, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                     .addContainerGap(57, Short.MAX_VALUE)
-                    .addComponent(searchByFees1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchByFeesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(53, 53, 53)))
         );
         jPanel4Layout.setVerticalGroup(
@@ -305,15 +305,16 @@ public class EventManagementSystem extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(searchByFeesText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(64, Short.MAX_VALUE))
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                     .addContainerGap(74, Short.MAX_VALUE)
-                    .addComponent(searchByFees1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchByFeesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(10, 10, 10)))
         );
 
+        displayEvents.setEditable(false);
         displayEvents.setColumns(20);
         displayEvents.setRows(5);
         jScrollPane1.setViewportView(displayEvents);
@@ -419,16 +420,19 @@ public class EventManagementSystem extends javax.swing.JFrame {
         deleteEvent.setEnabled(true);
     }//GEN-LAST:event_AdministratorActionPerformed
 
-    private void searchByFees1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchByFees1ActionPerformed
+    private void searchByFeesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchByFeesButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_searchByFees1ActionPerformed
+    }//GEN-LAST:event_searchByFeesButtonActionPerformed
 
     private void resetFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetFormActionPerformed
-        ArrayList<String> otherList = new ArrayList<>();
-    
-    
+        eventName.setText(null);
+        eventOrganizer.setText(null);
+        eventFees.setText(null);
+        eventDate.setText(null);
+        displayEvents.setText(null);
+        searchByFeesText.setText(null);
+        searchByEventText.setText(null);
 
-    
     }//GEN-LAST:event_resetFormActionPerformed
 
     private void exitFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitFormActionPerformed
@@ -467,24 +471,28 @@ public class EventManagementSystem extends javax.swing.JFrame {
             eventFees.setText("");
             correctSubmission = false;
         }
+        
         if (eventName.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please enter an event name that is not null", "Alert", JOptionPane.WARNING_MESSAGE);
             correctSubmission = false;
         } else {
             inName = eventName.getText();
         }
+        
         if (eventOrganizer.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please enter an organizer that is not null", "Alert", JOptionPane.WARNING_MESSAGE);
             correctSubmission = false;
         } else {
             inOrganizer = eventOrganizer.getText();
         }
+        
         if (eventDate.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please enter an event date that is not null", "Alert", JOptionPane.WARNING_MESSAGE);
             correctSubmission = false;
         } else {
             inDate = eventDate.getText();
         }
+        
         if (onlineEvent.isSelected()) {
             typeOfEvent = "Online Event";
         } else if (faceToFaceEvent.isSelected()) {
@@ -510,9 +518,9 @@ public class EventManagementSystem extends javax.swing.JFrame {
         String inName = eventName.getText();
         boolean isFulfilled;
         isFulfilled = EventManagement.deleteEvent(inName);
-        if(isFulfilled == true){
+        if (isFulfilled == true) {
             JOptionPane.showMessageDialog(this, "Successfully deleted the event" + inName + " !", "Success", JOptionPane.INFORMATION_MESSAGE);
-        }else{
+        } else {
             JOptionPane.showMessageDialog(this, "Please enter a valid event to delete by :0", "Alert", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_deleteEvent
@@ -580,12 +588,12 @@ public class EventManagementSystem extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JRadioButton onlineEvent;
     private javax.swing.JButton registerEvent;
     private javax.swing.JButton resetForm;
-    private javax.swing.JButton searchByFees1;
+    private javax.swing.JTextField searchByEventText;
+    private javax.swing.JButton searchByFeesButton;
+    private javax.swing.JTextField searchByFeesText;
     private javax.swing.JButton searchByName;
     private javax.swing.ButtonGroup userSelectEventType;
     private javax.swing.ButtonGroup userSelectGroup;

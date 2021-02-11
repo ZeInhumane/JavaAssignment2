@@ -94,7 +94,7 @@ public class EventManagement {
         //Add array list to another array list
         String stringInFees = String.valueOf(inFees);
         //List 1
-        List<String> namesList = Arrays.asList(inName + ";", inOrganizer + ";", stringInFees + ";", inDate + ";", typeOfEvent);
+        List<String> namesList = Arrays.asList(inName + ";", inOrganizer + ";", stringInFees + ";", inDate + ";", typeOfEvent +"\n");
         //List 2
         ArrayList<String> otherList = new ArrayList<>();
         otherList.addAll(namesList);
