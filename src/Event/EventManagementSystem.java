@@ -18,12 +18,13 @@ import static jdk.nashorn.internal.objects.Global.undefined;
  */
 public class EventManagementSystem extends javax.swing.JFrame {
 
+    EventManagement EventManagement = new EventManagement();
+
     /**
      * Creates new form Test
      */
     public EventManagementSystem() {
         initComponents();
-        EventManagement EventManagement = new EventManagement();
     }
 
     /**
@@ -37,6 +38,7 @@ public class EventManagementSystem extends javax.swing.JFrame {
 
         userSelectGroup = new javax.swing.ButtonGroup();
         userSelectEventType = new javax.swing.ButtonGroup();
+        jPanel5 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         Normal = new javax.swing.JRadioButton();
         Administrator = new javax.swing.JRadioButton();
@@ -62,14 +64,25 @@ public class EventManagementSystem extends javax.swing.JFrame {
         registerEvent = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
-        searchByFeesText = new javax.swing.JTextField();
         searchByFeesButton = new javax.swing.JButton();
+        searchByFeesText = new javax.swing.JSpinner();
         jScrollPane1 = new javax.swing.JScrollPane();
         displayEvents = new javax.swing.JTextArea();
         jLabel9 = new javax.swing.JLabel();
         displayEvent = new javax.swing.JButton();
         resetForm = new javax.swing.JButton();
         exitForm = new javax.swing.JButton();
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -241,6 +254,11 @@ public class EventManagementSystem extends javax.swing.JFrame {
         jLabel7.setText("Event Name:");
 
         searchByName.setText("Search By Name");
+        searchByName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchByName(evt);
+            }
+        });
 
         registerEvent.setText("Register Event");
 
@@ -280,9 +298,11 @@ public class EventManagementSystem extends javax.swing.JFrame {
         searchByFeesButton.setText("Search by fees");
         searchByFeesButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchByFeesButtonActionPerformed(evt);
+                searchByFees(evt);
             }
         });
+
+        searchByFeesText.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, null, 1.0d));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -291,8 +311,8 @@ public class EventManagementSystem extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(47, 47, 47)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8)
-                    .addComponent(searchByFeesText, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(searchByFeesText, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
@@ -304,9 +324,9 @@ public class EventManagementSystem extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(searchByFeesText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                     .addContainerGap(74, Short.MAX_VALUE)
@@ -326,7 +346,7 @@ public class EventManagementSystem extends javax.swing.JFrame {
         displayEvent.setText("Display Events");
         displayEvent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchByFees(evt);
+                displayAllEvents(evt);
             }
         });
 
@@ -420,23 +440,18 @@ public class EventManagementSystem extends javax.swing.JFrame {
         deleteEvent.setEnabled(true);
     }//GEN-LAST:event_AdministratorActionPerformed
 
-    private void searchByFeesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchByFeesButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_searchByFeesButtonActionPerformed
-
     private void resetFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetFormActionPerformed
         eventName.setText(null);
         eventOrganizer.setText(null);
         eventFees.setText(null);
         eventDate.setText(null);
         displayEvents.setText(null);
-        searchByFeesText.setText(null);
+        searchByFeesText.setValue(0);
         searchByEventText.setText(null);
-
     }//GEN-LAST:event_resetFormActionPerformed
 
     private void exitFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitFormActionPerformed
-        // TODO add your handling code here:
+        System.exit(0); 
     }//GEN-LAST:event_exitFormActionPerformed
 
     private void eventNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eventNameActionPerformed
@@ -447,12 +462,11 @@ public class EventManagementSystem extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_eventOrganizerActionPerformed
 
-    private void searchByFees(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchByFees
+    private void displayAllEvents(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_displayAllEvents
         displayEvents.setText("");
-        EventManagement EventManagement = new EventManagement();
 
         displayEvents.append(EventManagement.displayAllEvents());
-    }//GEN-LAST:event_searchByFees
+    }//GEN-LAST:event_displayAllEvents
 
     private void addEvent(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addEvent
         EventManagement EventManagement = new EventManagement();
@@ -471,28 +485,28 @@ public class EventManagementSystem extends javax.swing.JFrame {
             eventFees.setText("");
             correctSubmission = false;
         }
-        
+
         if (eventName.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please enter an event name that is not null", "Alert", JOptionPane.WARNING_MESSAGE);
             correctSubmission = false;
         } else {
             inName = eventName.getText();
         }
-        
+
         if (eventOrganizer.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please enter an organizer that is not null", "Alert", JOptionPane.WARNING_MESSAGE);
             correctSubmission = false;
         } else {
             inOrganizer = eventOrganizer.getText();
         }
-        
+
         if (eventDate.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please enter an event date that is not null", "Alert", JOptionPane.WARNING_MESSAGE);
             correctSubmission = false;
         } else {
             inDate = eventDate.getText();
         }
-        
+
         if (onlineEvent.isSelected()) {
             typeOfEvent = "Online Event";
         } else if (faceToFaceEvent.isSelected()) {
@@ -514,7 +528,7 @@ public class EventManagementSystem extends javax.swing.JFrame {
     }//GEN-LAST:event_addEvent
 
     private void deleteEvent(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteEvent
-        EventManagement EventManagement = new EventManagement();
+
         String inName = eventName.getText();
         boolean isFulfilled;
         isFulfilled = EventManagement.deleteEvent(inName);
@@ -524,6 +538,28 @@ public class EventManagementSystem extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Please enter a valid event to delete by :0", "Alert", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_deleteEvent
+
+    private void searchByName(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchByName
+
+        displayEvents.setText("");
+        String inEventName = searchByEventText.getText();
+        if (inEventName == null) {
+            JOptionPane.showMessageDialog(this, "Please enter a something to search by!", "Alert", JOptionPane.WARNING_MESSAGE);
+        } else if (!inEventName.matches("[a-zA-Z_]+")) {
+            JOptionPane.showMessageDialog(this, "Please enter a STRING to search by!", "Alert", JOptionPane.WARNING_MESSAGE);
+        } else {
+            String displaySearchResults = EventManagement.searchByName(inEventName);
+            displayEvents.append(displaySearchResults);
+        }
+    }//GEN-LAST:event_searchByName
+
+    private void searchByFees(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchByFees
+        displayEvents.setText("");
+        double inEventFees = (double) searchByFeesText.getValue();
+
+        String displaySearchResults = EventManagement.searchByFees(inEventFees);
+        displayEvents.append(displaySearchResults);
+    }//GEN-LAST:event_searchByFees
 
     /**
      * @param args the command line arguments
@@ -587,13 +623,14 @@ public class EventManagementSystem extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JRadioButton onlineEvent;
     private javax.swing.JButton registerEvent;
     private javax.swing.JButton resetForm;
     private javax.swing.JTextField searchByEventText;
     private javax.swing.JButton searchByFeesButton;
-    private javax.swing.JTextField searchByFeesText;
+    private javax.swing.JSpinner searchByFeesText;
     private javax.swing.JButton searchByName;
     private javax.swing.ButtonGroup userSelectEventType;
     private javax.swing.ButtonGroup userSelectGroup;

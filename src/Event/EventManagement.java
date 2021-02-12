@@ -72,7 +72,7 @@ public class EventManagement {
             String date = currentLine.split(";")[2].trim();
             String price = currentLine.split(";")[3].trim();
             String eventType = currentLine.split(";")[4].trim();
-            displayAllEvents += String.format("%-10s", i+1)
+            displayAllEvents += String.format("%-10s", i + 1)
                     + String.format("%-30s", name)
                     + String.format("%-35s", club)
                     + String.format("%-35s", date)
@@ -94,7 +94,7 @@ public class EventManagement {
         //Add array list to another array list
         String stringInFees = String.valueOf(inFees);
         //List 1
-        List<String> namesList = Arrays.asList(inName + ";", inOrganizer + ";", stringInFees + ";", inDate + ";", typeOfEvent +"\n");
+        List<String> namesList = Arrays.asList(inName + ";", inOrganizer + ";", stringInFees + ";", inDate + ";", typeOfEvent + "\n");
         //List 2
         ArrayList<String> otherList = new ArrayList<>();
         otherList.addAll(namesList);
@@ -186,55 +186,84 @@ public class EventManagement {
      * @param inEventName
      * @return Event object, if found.
      */
-    public Event searchByName(String inEventName) {
-        String displaySearch = null;
+    public String searchByName(String inEventName) {
+        String displaySearch = "";
+        ArrayList<Integer> toBeDisplayed = new ArrayList<>();
         for (int i = 0; i < result.size(); i++) {
             String currentLine = result.get(i);
             String name = currentLine.split(";")[0];
-            if (name.equalsIgnoreCase(inEventName)) {
-                displaySearch += i;
+            if (name.toLowerCase().contains(inEventName.toLowerCase())) {
+                toBeDisplayed.add(i);
                 System.out.println("line to delete" + i);
             }
         }
         for (int i = 0; i < result.size(); i++) {
-            String currentLine = result.get(i);
-            String name = currentLine.split(";")[0].trim();
-            String club = currentLine.split(";")[1].trim();
-            String date = currentLine.split(";")[2].trim();
-            String price = currentLine.split(";")[3].trim();
-            String eventType = currentLine.split(";")[4].trim();
-            displaySearch += String.format("%-10s", i+1)
-                    + String.format("%-30s", name)
-                    + String.format("%-35s", club)
-                    + String.format("%-35s", date)
-                    + String.format("%-35s", price)
-                    + String.format("%-35s", eventType) + "\n";
+            for (int j = 0; j < toBeDisplayed.size(); j++) {
+                if (toBeDisplayed.get(j) == i) {
+                    String currentLine = result.get(i);
+                    String name = currentLine.split(";")[0].trim();
+                    String club = currentLine.split(";")[1].trim();
+                    String date = currentLine.split(";")[2].trim();
+                    String price = currentLine.split(";")[3].trim();
+                    String eventType = currentLine.split(";")[4].trim();
+                    displaySearch += String.format("%-10s", i + 1)
+                            + String.format("%-30s", name)
+                            + String.format("%-35s", club)
+                            + String.format("%-35s", date)
+                            + String.format("%-35s", price)
+                            + String.format("%-35s", eventType) + "\n";
+                }
+            }
         }
-        return null;
+        return displaySearch;
         //TODO
-            // Found it! Retrieve. 
-            // Assuming there are no repeats.
-            // If there are repeats, this will retrieve the last one found.
-            // TODO
-        
+        // Found it! Retrieve. 
+        // Assuming there are no repeats.
+        // If there are repeats, this will retrieve the last one found.
+        // TODO
+
         // TODO
     }
+
     /**
      * search for all events equal or less than inFees
      *
      * @param inMaxFees
      * @return Returns array containing events that meet the search criteria.
      */
-//    public Event[] searchByFees(double inMaxFees) {
-//        // TODO
-//        // Max case scenario is that all events meet inMaxFees
-//        // TODO
-//        
-//        // iterate all items in the events array
-//        // TODO
-//        
-//        // TODO
-//    }
+    public String searchByFees(double inMaxFees) {
+        String displaySearch = "";
+        ArrayList<Integer> toBeDisplayed = new ArrayList<>();
+        for (int i = 0; i < result.size(); i++) {
+            String currentLine = result.get(i);
+            String stringPrice = currentLine.split(";")[2];
+            double price = Double.parseDouble(stringPrice);
+            if (price < inMaxFees) {
+                toBeDisplayed.add(i);
+                System.out.println("line to delete" + i);
+            }
+        }
+        for (int i = 0; i < result.size(); i++) {
+            for (int j = 0; j < toBeDisplayed.size(); j++) {
+                if (toBeDisplayed.get(j) == i) {
+                    String currentLine = result.get(i);
+                    String name = currentLine.split(";")[0].trim();
+                    String club = currentLine.split(";")[1].trim();
+                    String date = currentLine.split(";")[2].trim();
+                    String price = currentLine.split(";")[3].trim();
+                    String eventType = currentLine.split(";")[4].trim();
+                    displaySearch += String.format("%-10s", i + 1)
+                            + String.format("%-30s", name)
+                            + String.format("%-35s", club)
+                            + String.format("%-35s", date)
+                            + String.format("%-35s", price)
+                            + String.format("%-35s", eventType) + "\n";
+                }
+            }
+        }
+        return displaySearch;
+    }
+
     /**
      * Test method for all the methods in EventManager Class.
      *
