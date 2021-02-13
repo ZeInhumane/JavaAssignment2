@@ -13,23 +13,13 @@ import javax.swing.JOptionPane;
 /**
  * Collection of events. Implemented here using a one-d array.
  *
- * @author Alvin Tang
+ * @author Matthew Chan
  */
 public class EventManagement {
 
     ArrayList<String> result = new ArrayList<>();
 
     private int countSearchResult; /// used by searchByFees
-
-    /**
-     *
-     * @return number of items in the returned search array.
-     */
-    public int getCountSearchResult() {
-        return 0;
-        // TODO
-    }
-
     /**
      * Constructor to initialize the events in the array.
      */
@@ -163,20 +153,7 @@ public class EventManagement {
         } else {
             correctDeletion = false;
         }
-//        else {
-//            // create the new array with events less the deleted event
-//            // Size of new array will be current array length, less one
-//            // TODO
-//
-//            // there are 2 indices we'll be working with.
-//            // i is the index for the current array
-//            // theNewIndex is the index into theNewList
-//            // TODO
-//                // this isn't the droid we're looking for...
-//                // We'll add all events that are not the event we want to delete
-//                // TODO
-//            }
-        // TODO
+
         return correctDeletion;
     }
 
@@ -224,7 +201,47 @@ public class EventManagement {
 
         // TODO
     }
-
+    ArrayList<Integer> registerEvent = new ArrayList<>();
+    public String registerEvent(String inEventName){
+        double totalPrice = 0;
+        String displaySearch = "";
+        
+        
+        for (int i = 0; i < result.size(); i++) {
+            String currentLine = result.get(i);
+            String name = currentLine.split(";")[0];
+            if (name.toLowerCase().contains(inEventName.toLowerCase())) {
+                registerEvent.add(i);
+                System.out.println("it is adding");
+                i+=999;
+            }
+        }
+        for (int i = 0; i < result.size(); i++) {
+            System.out.println("this is entering -1");
+            System.out.println(registerEvent.size() +" hi");
+            for (int j = 0; j < registerEvent.size(); j++) {
+                System.out.println("this is entering 0");
+                if (registerEvent.get(j) == i) {
+                    System.out.println("this is entering");
+                    String currentLine = result.get(i);
+                    String name = currentLine.split(";")[0].trim();
+                    String club = currentLine.split(";")[1].trim();
+                    String date = currentLine.split(";")[2].trim();
+                    String price = currentLine.split(";")[3].trim();
+                    String eventType = currentLine.split(";")[4].trim();
+                    displaySearch += String.format("%-10s", i + 1)
+                            + String.format("%-30s", name)
+                            + String.format("%-35s", club)
+                            + String.format("%-35s", date)
+                            + String.format("%-35s", price)
+                            + String.format("%-35s", eventType) + "\n";
+                    totalPrice += Double.parseDouble(date);  
+                }
+            }
+        }
+        displaySearch += totalPrice;
+        return displaySearch;
+    }
     /**
      * search for all events equal or less than inFees
      *
@@ -271,26 +288,6 @@ public class EventManagement {
      */
     public static void main(String[] args) {
         EventManagement theEM = new EventManagement();
-//        theEM.displayAllEvents();
-//        theEM.addEvent("Kickboxing", "Alvin", "5/6/2099", 59);
-//        
-//        theEM.displayAllEvents();
-//        
-//        // Test Search by name
-//        Event theFoundEvent = theEM.searchByName("Swimming");
-//        if (theFoundEvent == null)
-//           JOptionPane.showMessageDialog(null, "Swimming not found!");
-//        theFoundEvent = theEM.searchByName("Dancing");
-//        
-//        if(theFoundEvent != null)
-//            JOptionPane.showMessageDialog(null, theFoundEvent.getName() + " is by " + theFoundEvent.getOrganiser());
-//        // end Test Search by name
-//        
-//        Event[] theResults = theEM.searchByFees(11);
-//        for(int i = 0; i< theEM.getCountSearchResult(); i++)
-//            System.out.println(theResults[i].getName() + " costing $" + theResults[i].getFees());
-//        
-//        theEM.deleteEvent("Dancing");
-//        theEM.displayAllEvents();
+
     }
 }

@@ -261,6 +261,11 @@ public class EventManagementSystem extends javax.swing.JFrame {
         });
 
         registerEvent.setText("Register Event");
+        registerEvent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registerEventActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -451,7 +456,7 @@ public class EventManagementSystem extends javax.swing.JFrame {
     }//GEN-LAST:event_resetFormActionPerformed
 
     private void exitFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitFormActionPerformed
-        System.exit(0); 
+        System.exit(0);
     }//GEN-LAST:event_exitFormActionPerformed
 
     private void eventNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eventNameActionPerformed
@@ -545,7 +550,7 @@ public class EventManagementSystem extends javax.swing.JFrame {
         String inEventName = searchByEventText.getText();
         if (inEventName == null) {
             JOptionPane.showMessageDialog(this, "Please enter a something to search by!", "Alert", JOptionPane.WARNING_MESSAGE);
-        } else if (!inEventName.matches("[a-zA-Z_]+")) {
+        } else if (!inEventName.matches("^[a-zA-Z0-9_][a-zA-Z0-9_ ]*[a-zA-Z0-9_]$")) {
             JOptionPane.showMessageDialog(this, "Please enter a STRING to search by!", "Alert", JOptionPane.WARNING_MESSAGE);
         } else {
             String displaySearchResults = EventManagement.searchByName(inEventName);
@@ -560,6 +565,38 @@ public class EventManagementSystem extends javax.swing.JFrame {
         String displaySearchResults = EventManagement.searchByFees(inEventFees);
         displayEvents.append(displaySearchResults);
     }//GEN-LAST:event_searchByFees
+ArrayList<String> checkForDuplicate = new ArrayList<>();
+    private void registerEventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerEventActionPerformed
+        
+        String inEventName = searchByEventText.getText();
+        boolean isDuplicate = false;
+        for (int i = 0; i < checkForDuplicate.size(); i++) {
+            String checkForDupe = checkForDuplicate.get(i);
+            System.out.println(checkForDupe + "checking for this dupe");
+            System.out.println(inEventName + " in event name");
+            if (checkForDupe.equalsIgnoreCase(inEventName)) {
+                System.out.println("it is entering");
+                checkForDuplicate.get(i);
+                isDuplicate = true;
+            } else {
+            }
+        }
+        
+        if (inEventName == null) {
+            JOptionPane.showMessageDialog(this, "Please enter a something to register !", "Alert", JOptionPane.WARNING_MESSAGE);
+        } else if (!inEventName.matches("^[a-zA-Z0-9_][a-zA-Z0-9_ ]*[a-zA-Z0-9_]$")) {
+            JOptionPane.showMessageDialog(this, "Please enter a STRING to search by!", "Alert", JOptionPane.WARNING_MESSAGE);
+        } else if (isDuplicate == true) {
+            JOptionPane.showMessageDialog(this, "Please enter a another event to register by, as this event has already been registered!", "Alert", JOptionPane.WARNING_MESSAGE);
+        } else {
+            displayEvents.setText(null);
+            String displaySearchResults = EventManagement.registerEvent(inEventName);
+            displayEvents.append(displaySearchResults);
+            checkForDuplicate.add(inEventName);
+            System.out.println(checkForDuplicate);
+            System.out.println(isDuplicate);
+        }
+    }//GEN-LAST:event_registerEventActionPerformed
 
     /**
      * @param args the command line arguments
