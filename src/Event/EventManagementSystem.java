@@ -261,6 +261,7 @@ public class EventManagementSystem extends javax.swing.JFrame {
         });
 
         registerEvent.setText("Register Event");
+        registerEvent.setEnabled(false);
         registerEvent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 registerEventActionPerformed(evt);
@@ -529,6 +530,10 @@ public class EventManagementSystem extends javax.swing.JFrame {
             eventDate.setText("");
             eventFees.setText("");
             userSelectEventType.clearSelection();
+            displayEvents.setText("");
+
+            displayEvents.append(EventManagement.displayAllEvents());
+            validate();
         }
     }//GEN-LAST:event_addEvent
 
@@ -539,8 +544,12 @@ public class EventManagementSystem extends javax.swing.JFrame {
         isFulfilled = EventManagement.deleteEvent(inName);
         if (isFulfilled == true) {
             JOptionPane.showMessageDialog(this, "Successfully deleted the event" + inName + " !", "Success", JOptionPane.INFORMATION_MESSAGE);
+            displayEvents.setText("");
+
+            displayEvents.append(EventManagement.displayAllEvents());
         } else {
             JOptionPane.showMessageDialog(this, "Please enter a valid event to delete by :0", "Alert", JOptionPane.WARNING_MESSAGE);
+            
         }
     }//GEN-LAST:event_deleteEvent
 
@@ -554,7 +563,11 @@ public class EventManagementSystem extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Please enter a STRING to search by!", "Alert", JOptionPane.WARNING_MESSAGE);
         } else {
             String displaySearchResults = EventManagement.searchByName(inEventName);
-            displayEvents.append(displaySearchResults);
+            if(displaySearchResults == null ||displaySearchResults == ""){
+                JOptionPane.showMessageDialog(this, "There seems to be no event by that name!", "Alert", JOptionPane.WARNING_MESSAGE);
+            }else{
+                displayEvents.append(displaySearchResults);
+            }
         }
     }//GEN-LAST:event_searchByName
 

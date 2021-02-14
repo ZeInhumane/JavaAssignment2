@@ -4,9 +4,9 @@ package Event;
  * The Event class provides a basic encapsulation of the 4 properties that
  * defines an event, and its necessary getters and setters.
  *
- * @author Alvin Tang
+ * @author Matthew Chan
  */
-public class Event {
+public class Event implements java.io.Serializable {
 
     /**
      * @param args the command line arguments
@@ -19,8 +19,8 @@ public class Event {
             String inEventType) {
         this.name = inName;
         this.organizer = inOrganizer;
-        this.fees = inFees;
         this.date = inDate;
+        this.fees = inFees;
         this.eventType = inEventType;
     }
 
