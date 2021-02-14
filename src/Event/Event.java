@@ -11,17 +11,16 @@ public class Event implements java.io.Serializable {
     /**
      * @param args the command line arguments
      */
-    private String name, organizer, date, eventType;
+    private String name, organizer, date;
     private double fees;
 //    name, organizer, fees and date and time of the event
 
-    public Event(String inName, String inOrganizer, String inDate, double inFees,
-            String inEventType) {
+    public Event(String inName, String inOrganizer, String inDate, double inFees) {
         this.name = inName;
         this.organizer = inOrganizer;
         this.date = inDate;
         this.fees = inFees;
-        this.eventType = inEventType;
+
     }
 
     public String getName() {
@@ -40,9 +39,6 @@ public class Event implements java.io.Serializable {
         return fees;
     }
 
-    public String getEventType() {
-        return eventType;
-    }
 
     //Getters and setters
     public void setName(String inName) {
@@ -59,9 +55,6 @@ public class Event implements java.io.Serializable {
 
     public void setFees(double inFees) {
         this.fees = inFees;
-    }
-    public void setEventType(String inEventType) {
-        this.eventType = inEventType;
     }
 
 }
